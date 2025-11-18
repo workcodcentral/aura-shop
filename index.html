@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura | Minimalist Watches</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2a2a2a;
+            --primary-light: #3a3a3a;
+            --accent: #d4af37;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --text: #495057;
+            --text-light: #6c757d;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        .btn-accent:hover {
+            background: #c19d2e;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--white);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-icons a {
+            margin-left: 20px;
+            color: var(--text);
+            transition: var(--transition);
+        }
+
+        .nav-icons a:hover {
+            color: var(--accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, rgba(42, 42, 42, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%);
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-text {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-text h1 {
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Trust Badges */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            text-align: center;
+        }
+
+        .badge i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        /* Featured Products */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-img {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-left: 10px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--light);
+        }
+
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .testimonial-text:before, .testimonial-text:after {
+            content: '"';
+            font-size: 3rem;
+            color: rgba(42, 42, 42, 0.2);
+            position: absolute;
+        }
+
+        .testimonial-text:before {
+            top: -20px;
+            left: -10px;
+        }
+
+        .testimonial-text:after {
+            bottom: -40px;
+            right: -10px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .newsletter h2, .newsletter p {
+            color: var(--white);
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 30px auto 0;
+            display: flex;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: var(--radius) 0 0 var(--radius);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .newsletter-btn {
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-btn:hover {
+            background: #c19d2e;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+
+        .footer-col p, .footer-col a {
+            color: #adb5bd;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .contact-info i {
+            margin-right: 15px;
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2.2rem; }
+            
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-text {
+                margin-bottom: 50px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 0;
+            }
+            
+            .nav-links, .nav-icons {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input, .newsletter-btn {
+                width: 100%;
+                border-radius: var(--radius);
+                margin-bottom: 10px;
+            }
+            
+            section {
+                padding: 80px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .trust-badges {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Aura</a>
+                
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Shop</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                
+                <div class="nav-icons">
+                    <a href="#"><i class="fas fa-search"></i></a>
+                    <a href="#"><i class="fas fa-user"></i></a>
+                    <a href="#"><i class="fas fa-shopping-bag"></i></a>
+                </div>
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Timeless Elegance, Modern Design</h1>
+                    <p>Discover our collection of minimalist watches, crafted for those who appreciate precision and style.</p>
+                    <a href="#products" class="btn btn-accent">Shop The Collection</a>
+                    
+                    <div class="trust-badges">
+                        <div class="badge">
+                            <i class="fas fa-shield-alt"></i>
+                            <p>Secure Payment</p>
+                        </div>
+                        <div class="badge">
+                            <i class="fas fa-shipping-fast"></i>
+                            <p>Free Shipping</p>
+                        </div>
+                        <div class="badge">
+                            <i class="fas fa-undo-alt"></i>
+                            <p>30-Day Returns</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Aura Minimalist Watch">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Watches</h2>
+                <p>Handcrafted timepieces for everyday wear</p>
+            </div>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Classic Black Watch">
+                        <div class="product-badge">Bestseller</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Classic Black</h3>
+                        <p>Our signature timepiece with a matte black dial and genuine leather strap.</p>
+                        <div class="product-price">
+                            <div>
+                                <span class="price">$249.99</span>
+                                <span class="original-price">$299.99</span>
+                            </div>
+                            <a href="#" class="btn">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1551816230-ef5deaed4a26?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Silver Mesh Watch">
+                    </div>
+                    <div class="product-info">
+                        <h3>Silver Mesh</h3>
+                        <p>Elegant silver mesh bracelet with a minimalist white dial.</p>
+                        <div class="product-price">
+                            <div>
+                                <span class="price">$279.99</span>
+                                <span class="original-price">$329.99</span>
+                            </div>
+                            <a href="#" class="btn">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1547996160-81dfd9c4b1cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Rose Gold Watch">
+                        <div class="product-badge">New</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Rose Gold</h3>
+                        <p>Warm rose gold case with a brown leather strap for a sophisticated look.</p>
+                        <div class="product-price">
+                            <div>
+                                <span class="price">$299.99</span>
+                                <span class="original-price">$349.99</span>
+                            </div>
+                            <a href="#" class="btn">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Chronograph Watch">
+                    </div>
+                    <div class="product-info">
+                        <h3>Chronograph</h3>
+                        <p>Professional chronograph with multiple dials and a stainless steel case.</p>
+                        <div class="product-price">
+                            <div>
+                                <span class="price">$349.99</span>
+                            </div>
+                            <a href="#" class="btn">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Customers Say</h2>
+                <p>Don't just take our word for it</p>
+            </div>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <p>I've owned many watches, but my Aura Classic Black is by far my favorite. The quality is exceptional and it gets compliments every time I wear it. The shopping experience was seamless and delivery was faster than expected.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Michael Chen">
+                        </div>
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Verified Customer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Join Our Community</h2>
+            <p>Subscribe to receive updates on new collections and exclusive offers.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Aura</h3>
+                    <p>Crafting timeless timepieces for the modern individual. Our watches are designed to be both functional and fashionable.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Shop</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#testimonials">Reviews</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <p>123 Design Street</p>
+                                <p>Creative City, CC 12345</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <p>(555) 123-4567</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <p>support@aura-watches.com</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Aura Watches. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        const navIcons = document.querySelector('.nav-icons');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navIcons.style.display = navIcons.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '10px 0';
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.padding = '0';
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
+            }
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
